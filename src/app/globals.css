@@ -4,11 +4,11 @@
   --font-primary: 'Inter', sans-serif;
   --font-heading: 'Space Grotesk', sans-serif;
 
-  --color-primary: #161513;
-  --color-primary-hover: #2e2b27;
-  --color-accent: #C29B38;
-  --color-accent-light: #F7F1E5;
-  --color-accent-hover: #A88126;
+  --color-primary: #1D090B;
+  --color-primary-hover: #351216;
+  --color-accent: #C00802;
+  --color-accent-light: #FBECED;
+  --color-accent-hover: #E11B14;
 
   --color-bg: #FFFFFF;
   --color-bg-subtle: #FAF8F5;
@@ -595,4 +595,34 @@ img {
     gap: 1rem;
     text-align: center;
   }
+}
+
+/* Google Translate Widget Cleanups */
+.goog-te-banner-frame,
+.skiptranslate.goog-te-banner-frame {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+  position: static !important;
+}
+
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.goog-logo-link {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  height: 0 !important;
+  overflow: hidden !important;
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/Header";
@@ -15,13 +16,6 @@ export const metadata: Metadata = {
     description: "Discover Your Beauty Potential. Elevate your beauty routine with Ehe Hair.",
     url: "https://ehehair.com",
     siteName: "Ehe Hair",
-    images: [
-      {
-        url: "/site-logo-dark.svg",
-        width: 120,
-        height: 80,
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
@@ -41,6 +35,23 @@ export default function RootLayout({
           <main style={{ flex: 1 }}>{children}</main>
           <Footer />
         </CartProvider>
+        <Script id="google-translate-init" strategy="afterInteractive">
+          {`
+            function googleTranslateElementInit() {
+              if (window.google && window.google.translate) {
+                new window.google.translate.TranslateElement({
+                  pageLanguage: 'en',
+                  includedLanguages: 'en,fr,zh-CN,ja,ko',
+                  autoDisplay: false
+                }, 'google_translate_element');
+              }
+            }
+          `}
+        </Script>
+        <Script
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

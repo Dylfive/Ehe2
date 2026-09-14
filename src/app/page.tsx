@@ -498,7 +498,7 @@ export default function HomePage() {
       <section
         style={{
           padding: "5rem 0",
-          background: "linear-gradient(135deg, #161513 0%, #29241E 100%)",
+          background: "linear-gradient(135deg, #1D090B 0%, #301014 100%)",
           color: "#FFFFFF",
           textAlign: "center",
         }}
@@ -507,8 +507,8 @@ export default function HomePage() {
           <span
             className="badge"
             style={{
-              backgroundColor: "rgba(194, 155, 56, 0.2)",
-              color: "var(--color-accent)",
+              backgroundColor: "rgba(192, 8, 2, 0.2)",
+              color: "#FFFFFF",
               marginBottom: "1.25rem",
             }}
           >

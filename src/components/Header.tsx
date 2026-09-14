@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
+import Logo from "@/components/Logo";
+import LanguageSelector from "@/components/LanguageSelector";
 import { ShoppingBag, Menu, X } from "lucide-react";
 
 export default function Header() {
@@ -26,13 +27,7 @@ export default function Header() {
         <div className="header-inner">
           {/* Logo */}
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-            <Image
-              src="/site-logo-dark.svg"
-              alt="Ehe Hair Logo"
-              width={54}
-              height={36}
-              priority
-            />
+            <Logo width={52} height={35} color="var(--color-primary)" />
             <span
               style={{
                 fontFamily: "var(--font-heading)",
@@ -50,7 +45,7 @@ export default function Header() {
           <nav>
             <ul className="nav-links">
               {navLinks.map((link) => {
-                const isActive = pathname === link.href;
+                const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
                 return (
                   <li key={link.href}>
                     <Link
@@ -67,6 +62,9 @@ export default function Header() {
 
           {/* Actions */}
           <div className="header-actions">
+            {/* Language Selector */}
+            <LanguageSelector />
+
             <button
               onClick={toggleCart}
               className="cart-button-header"
@@ -121,6 +119,9 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <div style={{ marginTop: "0.5rem", display: "flex", gap: "1rem", alignItems: "center" }}>
+              <LanguageSelector />
+            </div>
             <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}

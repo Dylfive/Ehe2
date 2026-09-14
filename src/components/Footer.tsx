@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Logo from "@/components/Logo";
 
 export default function Footer() {
   return (
@@ -10,14 +10,7 @@ export default function Footer() {
           {/* Brand Col */}
           <div className="footer-col">
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.25rem" }}>
-              <div style={{ filter: "brightness(0) invert(1)" }}>
-                <Image
-                  src="/site-logo-dark.svg"
-                  alt="Ehe Hair Logo"
-                  width={46}
-                  height={32}
-                />
-              </div>
+              <Logo width={46} height={32} color="#FFFFFF" />
               <span
                 style={{
                   fontFamily: "var(--font-heading)",
