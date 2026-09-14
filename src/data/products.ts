@@ -1,0 +1,198 @@
+export interface Product {
+  id: string;
+  slug: string;
+  name: string;
+  price: number;
+  category: string;
+  image: string;
+  description: string;
+  features?: string[];
+  inStock: boolean;
+}
+
+export const PRODUCTS: Product[] = [
+  {
+    id: "1780",
+    slug: "baby-dont-cry-shampoo-taming-spray-duo",
+    name: "Baby Don’t Cry Shampoo, Taming Spray Duo",
+    price: 32.40,
+    category: "Kids / Shampoo",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Baby-Dont-Cry-Taming-Spray-Duo-600x600.jpg",
+    description: "Tearless gentle shampoo and leave-in detangling spray designed for children of all ages. Helps keep hair soft, manageable, and smelling great all day.",
+    features: ["Tear-free formula", "Gentle detangler", "Sulfate-free", "Ideal for daily use"],
+    inStock: true,
+  },
+  {
+    id: "1822",
+    slug: "double-hitter-2-in-1-shampoo-conditioner-mitch",
+    name: "Double Hitter 2-in-1 Shampoo & Conditioner – Mitch",
+    price: 72.00,
+    category: "Shampoo / Conditioner",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Double-Hitter-2-in-1-Shampoo-Conditioner-Mitch-600x600-1.jpg",
+    description: "Washes and conditions in one single step, leaving hair feeling full, clean, and healthy. Saves time in your daily routine without sacrificing hydration or volume.",
+    features: ["2-in-1 conditioning wash", "Leaves hair full and manageable", "Fresh invigorating scent"],
+    inStock: true,
+  },
+  {
+    id: "1827",
+    slug: "hemp-multitasking-spray",
+    name: "Hemp Multitasking Spray",
+    price: 35.64,
+    category: "Styling",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Hemp-Multitasking-Spray-600x600.jpg",
+    description: "All-in-one leave-in spray conditions, detangles, and adds radiant shine while providing essential heat and environmental protection.",
+    features: ["Rich in hemp seed oil", "Thermal protection", "Eliminates frizz", "Weightless formula"],
+    inStock: true,
+  },
+  {
+    id: "1767",
+    slug: "kids-baby-dont-cry-shampoo",
+    name: "Kids – Baby Dont Cry Shampoo",
+    price: 25.99,
+    category: "Kids / Shampoo",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Kids-Baby-Dont-Cry-600x600.jpg",
+    description: "Specially formulated for toddlers and kids. Gently cleanses hair and scalp with zero tears or burning.",
+    features: ["Hypoallergenic", "Tear-free", "Gentle on sensitive scalps"],
+    inStock: true,
+  },
+  {
+    id: "1830",
+    slug: "kids-duo",
+    name: "Kids Duo",
+    price: 55.93,
+    category: "Kids",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Kids-Duo-600x600.jpg",
+    description: "Complete salon-quality daily care duo designed specifically for youthful hair that tangles easily.",
+    features: ["Pair of shampoo & detangler", "Sweet soothing scent", "Non-irritating ingredients"],
+    inStock: true,
+  },
+  {
+    id: "1832",
+    slug: "lavender-mint-conditioning-leave-in-spray",
+    name: "Lavender Mint Conditioning Leave-In Spray",
+    price: 35.64,
+    category: "Conditioner",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Lavender-Mint-Conditioning-Leave-In-Spray-600x600.jpg",
+    description: "Replenishes and conditions dry, thirsty strands while calming the senses with tea tree, natural mint, and lavender extracts.",
+    features: ["Aromatherapy soothing scent", "Deep moisture without heaviness", "Anti-breakage protection"],
+    inStock: true,
+  },
+  {
+    id: "1808",
+    slug: "matterial-strong-hold-ultra-matte-styling-clay",
+    name: "Matterial Strong Hold – Ultra Matte Styling Clay",
+    price: 35.64,
+    category: "Styling",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Matterial-Strong-Hold-Ultra-Matte-Styling-Clay-600x600-1.jpg",
+    description: "Powerful styling clay gives strong hold and an ultra-matte, modern dry finish that stays pliable and reworkable throughout the day.",
+    features: ["Ultra-matte finish", "All-day strong hold", "Natural thickening effect"],
+    inStock: true,
+  },
+  {
+    id: "1797",
+    slug: "mitch-barbers-classic-pomade",
+    name: "Mitch – Barbers Classic Pomade",
+    price: 35.80,
+    category: "Styling",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Mitch-Barbers-Classic-Pomade-600x600.jpg",
+    description: "Moderate hold with brilliant high shine for slicked back, pompadour, or timeless barber-inspired looks.",
+    features: ["High shine", "Medium hold", "Water-soluble easy rinse"],
+    inStock: true,
+  },
+  {
+    id: "1811",
+    slug: "mitch-clean-cut-styling-cream",
+    name: "Mitch – Clean Cut Styling Cream",
+    price: 35.64,
+    category: "Styling",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Mitch-Clean-Cut-Styling-Cream-600x600.jpg",
+    description: "Semi-matte finish and medium hold for clean, polished styling that looks naturally effortless.",
+    features: ["Semi-matte finish", "Pliable hold", "Ideal for fine to medium hair"],
+    inStock: true,
+  },
+  {
+    id: "1813",
+    slug: "mitch-reformer",
+    name: "Mitch – Reformer",
+    price: 35.64,
+    category: "Styling",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Mitch-Reform-600x600-1.jpg",
+    description: "Strong hold texturizer with zero shine locks styles firmly in place while boosting fullness and gritty volume.",
+    features: ["Zero-shine matte finish", "Powerful locked-in hold", "Adds grit and thickness"],
+    inStock: true,
+  },
+  {
+    id: "1835",
+    slug: "mitch-calibrate-thickening-cream",
+    name: "Mitch Calibrate Thickening Cream",
+    price: 26.73,
+    category: "Styling",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Mitch-Calibrate-Thickening-Cream-600x600.jpg",
+    description: "Calibrates hair thickness and adds noticeable body and clean separation without any stiffness or stickiness.",
+    features: ["Thickening polymers", "Lightweight texture", "Subtle definition"],
+    inStock: true,
+  },
+  {
+    id: "1785",
+    slug: "mitch-construction-paste",
+    name: "Mitch Construction Paste",
+    price: 26.73,
+    category: "Styling",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Mitch-Construction-Paste-600x600.jpg",
+    description: "Flexible mesh styler forms and shifts shape, adding texture and separation with crunch-free hold.",
+    features: ["Flexible mesh hold", "Crunch-free styling", "Clean conditioning wash out"],
+    inStock: true,
+  },
+  {
+    id: "1839",
+    slug: "mitch-heavy-hitter-deep-cleansing-shampoo",
+    name: "Mitch Heavy Hitter Deep Cleansing Shampoo",
+    price: 53.33,
+    category: "Shampoo",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/Mitch-Heavy-Hitter-Deep-Cleansing-Shampoo-600x600.jpg",
+    description: "Washes away stubborn buildup and leaves hair clean and revitalized with cedarwood and agave scent.",
+    features: ["Deep pore clarifying", "Cedarwood scent", "Non-drying lather"],
+    inStock: true,
+  },
+  {
+    id: "1793",
+    slug: "mvrck-beard-oil",
+    name: "MVRCK Beard Oil",
+    price: 27.00,
+    category: "Styling",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/MVRCK-Beard-Oil-600x600.jpg",
+    description: "Hydrating oil for beards and dry skin. Adds soft shine and conditioning without greasy residue.",
+    features: ["Enriched with shea butter", "Fresh citrus aroma", "Conditions facial hair & skin"],
+    inStock: true,
+  },
+  {
+    id: "1773",
+    slug: "mvrck-dry-paste",
+    name: "MVRCK Dry Paste",
+    price: 35.64,
+    category: "Styling",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/MVRCK-Dry-Paste-600x600-1.jpg",
+    description: "Medium hold matte paste creates gritty texture and definition for messy, modern, lived-in haircuts.",
+    features: ["Gritty lived-in finish", "Medium hold", "Easy reworkability"],
+    inStock: true,
+  },
+  {
+    id: "1816",
+    slug: "mvrck-grooming-cream",
+    name: "MVRCK Grooming Cream",
+    price: 31.19,
+    category: "Styling",
+    image: "https://ehehair.com/wp-content/uploads/2024/09/MVRCK-Grooming-Cream-600x600.jpg",
+    description: "Light hold styling cream delivers subtle texture and effortless control with natural shine.",
+    features: ["Natural light hold", "Subtle satin sheen", "Smooths flyaways"],
+    inStock: true,
+  },
+];
+
+export function getProductBySlug(slug: string): Product | undefined {
+  return PRODUCTS.find((p) => p.slug === slug);
+}
+
+export function getProductById(id: string): Product | undefined {
+  return PRODUCTS.find((p) => p.id === id);
+}
