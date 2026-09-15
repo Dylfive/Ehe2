@@ -599,10 +599,14 @@ img {
 
 /* Google Translate Widget Cleanups */
 .goog-te-banner-frame,
-.skiptranslate.goog-te-banner-frame {
+.skiptranslate.goog-te-banner-frame,
+iframe.goog-te-banner-frame {
   display: none !important;
+  height: 0 !important;
+  visibility: hidden !important;
 }
 
+/* Prevent Google Translate from pushing body down */
 body {
   top: 0px !important;
   position: static !important;
@@ -626,3 +630,9 @@ body {
   height: 0 !important;
   overflow: hidden !important;
 }
+
+/* Hide the "Select Language" widget itself (we use our own) */
+.goog-te-gadget-simple {
+  display: none !important;
+}
+

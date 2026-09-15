@@ -29,6 +29,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        {/* Hidden Google Translate mount point */}
+        <div id="google_translate_element" style={{ display: "none" }} />
         <CartProvider>
           <Header />
           <CartDrawer />
@@ -42,9 +44,22 @@ export default function RootLayout({
                 new window.google.translate.TranslateElement({
                   pageLanguage: 'en',
                   includedLanguages: 'en,fr,zh-CN,ja,ko',
-                  autoDisplay: false
+                  autoDisplay: false,
+                  layout: 0
                 }, 'google_translate_element');
               }
+              // Aggressively hide the Google Translate toolbar banner
+              function hideGoogleBar() {
+                var bar = document.querySelector('.goog-te-banner-frame');
+                if (bar) bar.style.display = 'none';
+                var body = document.body;
+                if (body && body.style.top && body.style.top !== '0px') {
+                  body.style.top = '0px';
+                }
+              }
+              hideGoogleBar();
+              var observer = new MutationObserver(hideGoogleBar);
+              observer.observe(document.body, { childList: true, subtree: true, attributes: true });
             }
           `}
         </Script>

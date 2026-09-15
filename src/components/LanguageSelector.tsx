@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Globe, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 interface Language {
   code: string;
@@ -23,19 +23,29 @@ export default function LanguageSelector() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Check existing cookie
-    const getCookie = (name: string) => {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop()?.split(";").shift();
-      return null;
-    };
-
-    const cookieVal = getCookie("googtrans");
-    if (cookieVal) {
-      const code = cookieVal.split("/").pop();
-      const match = LANGUAGES.find((l) => l.code === code);
-      if (match) setCurrentLang(match);
+    // 1. Check localStorage first for saved preference
+    const saved = localStorage.getItem("preferred_lang");
+    if (saved) {
+      const match = LANGUAGES.find((l) => l.code === saved);
+      if (match) {
+        setCurrentLang(match);
+      }
+    } else {
+      // 2. Check existing googtrans cookie
+      const cookies = document.cookie.split(";");
+      for (const c of cookies) {
+        const trimmed = c.trim();
+        if (trimmed.startsWith("googtrans=")) {
+          const val = trimmed.substring("googtrans=".length);
+          const code = val.split("/").filter(Boolean).pop();
+          const match = LANGUAGES.find((l) => l.code === code);
+          if (match) {
+            setCurrentLang(match);
+            localStorage.setItem("preferred_lang", match.code);
+            break;
+          }
+        }
+      }
     }
 
     // Close on outside click
@@ -52,22 +62,44 @@ export default function LanguageSelector() {
     setCurrentLang(lang);
     setIsOpen(false);
 
+    // Save choice in localStorage
+    localStorage.setItem("preferred_lang", lang.code);
+
     // Set Google Translate cookie
     const domain = window.location.hostname;
-    document.cookie = `googtrans=/en/${lang.code}; path=/;`;
-    document.cookie = `googtrans=/en/${lang.code}; path=/; domain=.${domain};`;
+    if (lang.code === "en") {
+      // Clear cookies for returning to English
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "googtrans=/en/en; path=/;";
+      if (domain && domain !== "localhost") {
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${domain};`;
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
+        document.cookie = `googtrans=/en/en; path=/; domain=.${domain};`;
+        document.cookie = `googtrans=/en/en; path=/; domain=${domain};`;
+      }
+    } else {
+      document.cookie = `googtrans=/en/${lang.code}; path=/;`;
+      if (domain && domain !== "localhost") {
+        document.cookie = `googtrans=/en/${lang.code}; path=/; domain=.${domain};`;
+        document.cookie = `googtrans=/en/${lang.code}; path=/; domain=${domain};`;
+      }
+    }
 
-    // Trigger reload so translation applies
+    // Reload so Google Translate applies
     window.location.reload();
   };
 
   return (
-    <div ref={dropdownRef} style={{ position: "relative", display: "inline-block" }}>
-      {/* Hidden container for Google Translate Element */}
-      <div id="google_translate_element" style={{ display: "none" }}></div>
-
+    <div
+      ref={dropdownRef}
+      className="notranslate"
+      translate="no"
+      style={{ position: "relative", display: "inline-block" }}
+    >
       <button
         type="button"
+        className="notranslate"
+        translate="no"
         onClick={() => setIsOpen(!isOpen)}
         style={{
           display: "flex",
@@ -92,6 +124,8 @@ export default function LanguageSelector() {
 
       {isOpen && (
         <div
+          className="notranslate"
+          translate="no"
           style={{
             position: "absolute",
             top: "calc(100% + 6px)",
@@ -113,6 +147,8 @@ export default function LanguageSelector() {
               <button
                 key={lang.code}
                 type="button"
+                className="notranslate"
+                translate="no"
                 onClick={() => changeLanguage(lang)}
                 style={{
                   display: "flex",
