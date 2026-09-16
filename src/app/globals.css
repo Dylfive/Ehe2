@@ -636,3 +636,149 @@ body {
   display: none !important;
 }
 
+
+/* ─────────────────────────────────────────────────────────────────
+   MOBILE OPTIMIZATION
+   ───────────────────────────────────────────────────────────────── */
+
+/* Spin keyframe — used by Loader2 in checkout / contact form */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* 1. Dynamic viewport height — prevents Safari address/tab bar clipping */
+body {
+  min-height: 100dvh;
+}
+
+.cart-drawer {
+  height: 100dvh;
+}
+
+.cart-drawer-footer {
+  /* Push above iPhone home indicator */
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+}
+
+/* 3. Touch targets — WCAG minimum 44 x 44 px */
+.qty-btn {
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
+}
+
+.cart-button-header {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.mobile-menu-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+/* Cart page responsive 2-column grid */
+.cart-page-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* Contact page responsive 2-column grid */
+.contact-page-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Contact form name row */
+.contact-name-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+/* 2. Sticky mobile Add-to-Cart bar (Product Detail Page) — shown only on mobile */
+.sticky-mobile-cta {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: #FFFFFF;
+  border-top: 1px solid var(--color-border);
+  padding: 0.85rem 1.25rem;
+  padding-bottom: calc(0.85rem + env(safe-area-inset-bottom));
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.sticky-mobile-cta-price {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+/* ── Mobile breakpoints ─────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  /* 2. iOS zoom prevention: font-size ≥ 16px on all inputs */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Cart page: stack summary below items */
+  .cart-page-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Contact page: stack details below form */
+  .contact-page-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  /* Contact form: stack name fields */
+  .contact-name-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Product detail page: image above, info below */
+  .product-detail-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Show sticky Add-to-Cart bar */
+  .sticky-mobile-cta {
+    display: flex;
+  }
+
+  /* 5. Mobile nav: prevent horizontal overflow jitter */
+  .site-header {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-page-grid {
+    gap: 1.5rem;
+  }
+
+  .contact-page-grid {
+    gap: 2rem;
+  }
+}

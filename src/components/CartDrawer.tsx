@@ -1,28 +1,42 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight } from "lucide-react";
+import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, Loader2 } from "lucide-react";
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, updateQuantity, removeFromCart, subtotal, totalItems } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  // Lock body scroll while drawer is open (important on iOS)
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
 
   if (!isOpen) return null;
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     setIsCheckingOut(true);
-    const stripePaymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
-    if (stripePaymentLink) {
-      window.location.href = stripePaymentLink;
-      return;
+    setCheckoutError(null);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.url) {
+        throw new Error(data.error ?? "Could not start checkout. Please try again.");
+      }
+      window.location.href = data.url;
+    } catch (err) {
+      setCheckoutError(err instanceof Error ? err.message : "An unexpected error occurred.");
+      setIsCheckingOut(false);
     }
-    const prefix = process.env.NODE_ENV === "production" ? "/Ehe2" : "";
-    setTimeout(() => {
-      window.location.href = `${prefix}/checkout/success/`;
-    }, 600);
   };
 
   return (
@@ -130,6 +144,19 @@ export default function CartDrawer() {
             <p style={{ fontSize: "0.8rem", color: "var(--color-text-muted)", marginBottom: "1rem" }}>
               Taxes and shipping calculated at checkout.
             </p>
+            {checkoutError && (
+              <p style={{
+                fontSize: "0.8rem",
+                color: "#C00802",
+                backgroundColor: "#FBECED",
+                border: "1px solid #f5c6c6",
+                borderRadius: "6px",
+                padding: "0.6rem 0.75rem",
+                marginBottom: "0.75rem",
+              }}>
+                {checkoutError}
+              </p>
+            )}
             <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
               <button
                 onClick={handleCheckout}
@@ -137,8 +164,17 @@ export default function CartDrawer() {
                 className="btn btn-primary"
                 style={{ width: "100%", justifyContent: "center" }}
               >
-                {isCheckingOut ? "Processing..." : "Checkout with Stripe"}
-                {!isCheckingOut && <ArrowRight size={16} />}
+                {isCheckingOut ? (
+                  <>
+                    <Loader2 size={16} style={{ animation: "spin 1s linear infinite" }} />
+                    Redirecting to Stripe…
+                  </>
+                ) : (
+                  <>
+                    Checkout with Stripe
+                    <ArrowRight size={16} />
+                  </>
+                )}
               </button>
               <Link
                 href="/cart"
@@ -151,6 +187,7 @@ export default function CartDrawer() {
             </div>
           </div>
         )}
+
       </div>
     </>
   );

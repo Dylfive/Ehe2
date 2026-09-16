@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/data/products";
@@ -11,12 +11,28 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+  // Controls whether the sticky bottom CTA bar is visible
+  const [showStickyCta, setShowStickyCta] = useState(false);
+  const addToCartRef = useRef<HTMLButtonElement>(null);
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
+
+  // Show the sticky bar only when the native "Add To Cart" button scrolls out of view
+  useEffect(() => {
+    const button = addToCartRef.current;
+    if (!button) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyCta(!entry.isIntersecting),
+      { threshold: 0, rootMargin: "0px" }
+    );
+    observer.observe(button);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div style={{ padding: "3rem 0 6rem" }}>
@@ -31,6 +47,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
         </div>
 
         <div
+          className="product-detail-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
@@ -54,7 +71,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               alt={product.name}
               fill
               priority
-              sizes="(max-width: 960px) 100vw, 50vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: "cover" }}
             />
           </div>
@@ -148,6 +165,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               </div>
 
               <button
+                ref={addToCartRef}
                 onClick={handleAddToCart}
                 className={`btn ${added ? "btn-accent" : "btn-primary"}`}
                 style={{ flex: 1 }}
@@ -191,6 +209,32 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Sticky mobile CTA — appears when Add To Cart button scrolls out of view */}
+      <div
+        className="sticky-mobile-cta"
+        style={{ display: showStickyCta ? "flex" : "none" }}
+        aria-hidden={!showStickyCta}
+      >
+        <span className="sticky-mobile-cta-price">${product.price.toFixed(2)}</span>
+        <button
+          onClick={handleAddToCart}
+          className={`btn ${added ? "btn-accent" : "btn-primary"}`}
+          style={{ flex: 1, justifyContent: "center" }}
+        >
+          {added ? (
+            <>
+              <Check size={18} />
+              Added!
+            </>
+          ) : (
+            <>
+              <ShoppingBag size={16} />
+              Add To Cart
+            </>
+          )}
+        </button>
       </div>
     </div>
   );

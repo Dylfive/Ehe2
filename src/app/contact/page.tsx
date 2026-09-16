@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Phone, Mail, MapPin, Send, CheckCircle2, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Send, CheckCircle2, Clock, Loader2 } from "lucide-react";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -13,9 +15,41 @@ export default function ContactPage() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+    if (!formspreeId) {
+      setSubmitError("Contact form is not configured. Please call or email us directly.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          service: formData.service,
+          message: formData.message,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.errors?.[0]?.message ?? "Failed to send message. Please try again.");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "An unexpected error occurred.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -32,14 +66,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1.2fr 0.8fr",
-            gap: "4rem",
-            alignItems: "start",
-          }}
-        >
+        <div className="contact-page-grid">
           {/* Form */}
           <div
             style={{
@@ -81,7 +108,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit}>
                 <h2 style={{ fontSize: "1.5rem", marginBottom: "1.75rem" }}>Send a Message</h2>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.25rem" }}>
+                <div className="contact-name-grid">
                   <div>
                     <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, marginBottom: "0.4rem" }}>
                       First Name *
@@ -164,12 +191,12 @@ export default function ContactPage() {
                   >
                     <option value="Appointment Booking">In-Salon Appointment Booking</option>
                     <option value="Virtual Consultation">Virtual Consultation (Zoom Hair Clinic)</option>
-                    <option value="Product Inquiries">Product Recommendations & Inquiries</option>
+                    <option value="Product Inquiries">Product Recommendations &amp; Inquiries</option>
                     <option value="General Support">General Inquiries</option>
                   </select>
                 </div>
 
-                <div style={{ marginBottom: "2rem" }}>
+                <div style={{ marginBottom: "1.25rem" }}>
                   <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, marginBottom: "0.4rem" }}>
                     Message *
                   </label>
@@ -191,9 +218,39 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary" style={{ width: "100%", justifyContent: "center" }}>
-                  <Send size={16} />
-                  Submit Request
+                {submitError && (
+                  <p
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "#C00802",
+                      backgroundColor: "#FBECED",
+                      border: "1px solid #f5c6c6",
+                      borderRadius: "6px",
+                      padding: "0.75rem 1rem",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    {submitError}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn btn-primary"
+                  style={{ width: "100%", justifyContent: "center" }}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 size={16} style={{ animation: "spin 1s linear infinite" }} />
+                      Sending…
+                    </>
+                  ) : (
+                    <>
+                      <Send size={16} />
+                      Submit Request
+                    </>
+                  )}
                 </button>
               </form>
             )}

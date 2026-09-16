@@ -4,23 +4,31 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, ShieldCheck } from "lucide-react";
+import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, ShieldCheck, Loader2 } from "lucide-react";
 
 export default function CartPage() {
   const { items, updateQuantity, removeFromCart, subtotal, totalItems } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     setIsCheckingOut(true);
-    const stripePaymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
-    if (stripePaymentLink) {
-      window.location.href = stripePaymentLink;
-      return;
+    setCheckoutError(null);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.url) {
+        throw new Error(data.error ?? "Could not start checkout. Please try again.");
+      }
+      window.location.href = data.url;
+    } catch (err) {
+      setCheckoutError(err instanceof Error ? err.message : "An unexpected error occurred.");
+      setIsCheckingOut(false);
     }
-    const prefix = process.env.NODE_ENV === "production" ? "/Ehe2" : "";
-    setTimeout(() => {
-      window.location.href = `${prefix}/checkout/success/`;
-    }, 600);
   };
 
   return (
@@ -47,14 +55,7 @@ export default function CartPage() {
             </Link>
           </div>
         ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.8fr 1.2fr",
-              gap: "3.5rem",
-              alignItems: "start",
-            }}
-          >
+          <div className="cart-page-grid">
             {/* Items Table */}
             <div
               style={{
@@ -231,14 +232,39 @@ export default function CartPage() {
                 <span>${subtotal.toFixed(2)}</span>
               </div>
 
+              {checkoutError && (
+                <p
+                  style={{
+                    fontSize: "0.85rem",
+                    color: "#C00802",
+                    backgroundColor: "#FBECED",
+                    border: "1px solid #f5c6c6",
+                    borderRadius: "6px",
+                    padding: "0.75rem 1rem",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  {checkoutError}
+                </p>
+              )}
+
               <button
                 onClick={handleCheckout}
                 disabled={isCheckingOut}
                 className="btn btn-primary"
                 style={{ width: "100%", justifyContent: "center", marginBottom: "1rem" }}
               >
-                {isCheckingOut ? "Connecting to Stripe..." : "Proceed To Stripe Checkout"}
-                {!isCheckingOut && <ArrowRight size={18} />}
+                {isCheckingOut ? (
+                  <>
+                    <Loader2 size={18} style={{ animation: "spin 1s linear infinite" }} />
+                    Redirecting to Stripe…
+                  </>
+                ) : (
+                  <>
+                    Proceed To Stripe Checkout
+                    <ArrowRight size={18} />
+                  </>
+                )}
               </button>
 
               <div
@@ -252,7 +278,7 @@ export default function CartPage() {
                 }}
               >
                 <ShieldCheck size={16} color="var(--color-accent)" />
-                Encrypted & Secured with Stripe Checkout
+                Encrypted &amp; Secured with Stripe Checkout
               </div>
             </div>
           </div>

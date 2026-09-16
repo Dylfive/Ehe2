@@ -102,6 +102,7 @@ export default function Header() {
               display: "flex",
               flexDirection: "column",
               gap: "1rem",
+              overflowX: "hidden",
             }}
           >
             {navLinks.map((link) => (
