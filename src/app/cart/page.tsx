@@ -20,9 +20,9 @@ export default function CartPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ items }),
       });
-      const data = await res.json();
-      if (!res.ok || !data.url) {
-        throw new Error(data.error ?? "Could not start checkout. Please try again.");
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data?.url) {
+        throw new Error(data?.error ?? `Server error (${res.status}). Please check Stripe configuration.`);
       }
       window.location.href = data.url;
     } catch (err) {

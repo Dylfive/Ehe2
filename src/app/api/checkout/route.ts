@@ -12,11 +12,22 @@ interface CheckoutItem {
   quantity: number;
 }
 
+export async function GET() {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  return Response.json({
+    status: "ok",
+    stripeConfigured: Boolean(secretKey && secretKey.startsWith("sk_")),
+  });
+}
+
 export async function POST(request: Request) {
   const secretKey = process.env.STRIPE_SECRET_KEY;
   if (!secretKey) {
     return Response.json(
-      { error: "Stripe is not configured. Please set STRIPE_SECRET_KEY." },
+      {
+        error:
+          "Stripe is not configured. Please ensure STRIPE_SECRET_KEY is set in your Vercel project settings and trigger a redeploy.",
+      },
       { status: 500 }
     );
   }
@@ -34,7 +45,19 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  // Determine application base URL dynamically from request headers or environment
+  const origin = request.headers.get("origin");
+  const host = request.headers.get("x-forwarded-host") || request.headers.get("host");
+  const proto = request.headers.get("x-forwarded-proto") || "https";
+
+  let appUrl = origin;
+  if (!appUrl && host) {
+    appUrl = `${proto}://${host}`;
+  }
+  if (!appUrl) {
+    appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  }
+  appUrl = appUrl.replace(/\/+$/, "");
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -44,9 +67,9 @@ export async function POST(request: Request) {
           currency: "cad",
           product_data: {
             name: item.product.name,
-            images: item.product.image.startsWith("http")
+            images: item.product.image?.startsWith("http")
               ? [item.product.image]
-              : [], // only absolute URLs are accepted by Stripe
+              : [],
           },
           // Stripe requires amounts in the smallest currency unit (cents)
           unit_amount: Math.round(item.product.price * 100),

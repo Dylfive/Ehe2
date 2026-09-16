@@ -11,11 +11,15 @@ export default function CartDrawer() {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
-  // Lock body scroll while drawer is open (important on iOS)
+  // Lock body scroll only while drawer is open (important on iOS)
   useEffect(() => {
+    if (!isOpen) return;
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
-  }, []);
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -28,9 +32,9 @@ export default function CartDrawer() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ items }),
       });
-      const data = await res.json();
-      if (!res.ok || !data.url) {
-        throw new Error(data.error ?? "Could not start checkout. Please try again.");
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data?.url) {
+        throw new Error(data?.error ?? `Server error (${res.status}). Please check Stripe configuration.`);
       }
       window.location.href = data.url;
     } catch (err) {
