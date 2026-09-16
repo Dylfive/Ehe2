@@ -1,7 +1,7 @@
 # Project Handoff: Ehe Hair (WordPress-Free Replatforming)
 
 > **Repository:** [https://github.com/Dylfive/Ehe2](https://github.com/Dylfive/Ehe2)  
-> **GitHub Pages Live Deployment:** [https://dylfive.github.io/Ehe2/](https://dylfive.github.io/Ehe2/)  
+> **Vercel Live Deployment:** [https://ehe2.vercel.app/](https://ehe2.vercel.app/)  
 > **Original Reference Site:** [https://ehehair.com](https://ehehair.com)  
 > **Target Production Domain:** `ehehair.com`  
 
@@ -20,7 +20,8 @@ This project completely rebuilds and decouples the **Ehe Hair** website away fro
 * **Fonts:** `Space Grotesk` (headings) and `Inter` (body), loaded via Google Fonts.
 * **Icons:** `lucide-react`.
 * **State Management:** React Context (`src/context/CartContext.tsx`) with automatic `localStorage` persistence.
-* **Hosting / Deployment:** GitHub Pages using Next.js static export (`output: 'export'`) and automated CI/CD via GitHub Actions (`.github/workflows/deploy.yml`).
+* **Hosting / Deployment:** Vercel serverless deployment connected to GitHub `main` branch with automatic CI/CD.
+* **Payments:** Dynamic Stripe Checkout sessions executed via `/api/checkout` with server-side key sanitization and `FetchHttpClient`.
 
 ---
 
@@ -59,20 +60,19 @@ This project completely rebuilds and decouples the **Ehe Hair** website away fro
 
 ---
 
-## 4. Pending Manual Setup (Action Items)
+## 4. Completed Integrations & Operational Setup
+ 
+### A. Stripe Payment Gateway (Active & Verified)
+* **Status:** Fully functional dynamic checkout.
+* **Architecture:** Route handler `src/app/api/checkout/route.ts` creates real Stripe Checkout sessions with line items in CAD.
+* **Serverless Resilience:** Features automated secret key sanitization (strips invisible newlines/quotes) and uses `Stripe.createFetchHttpClient()` for maximum compatibility with Vercel's serverless runtime.
+* **Switching to Live Payments:** When ready to accept real credit cards, simply update `STRIPE_SECRET_KEY` and `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` in Vercel Project Settings to your Stripe live keys (`sk_live_...` / `pk_live_...`) and redeploy.
 
-### A. Stripe Payment Gateway
-* **Why it's currently simulated:** GitHub Pages is a purely static host (no Node.js backend to run server-side secret keys securely). Clicking "Checkout" currently simulates the flow by redirecting to `/checkout/success/`.
-* **Path forward for next agent:**
-  * **Option 1 (Fastest for GitHub Pages):** Create Stripe Payment Links in the client's Stripe Dashboard and set `NEXT_PUBLIC_STRIPE_PAYMENT_LINK="https://buy.stripe.com/..."` in the environment.
-  * **Option 2 (Full Dynamic E-Commerce):** Deploy to **Vercel** or a Node-compatible host where `/api/checkout` can execute with `STRIPE_SECRET_KEY` and return dynamic Stripe Checkout Sessions with line items.
+### B. Contact Form Email Delivery (Active)
+* `src/app/contact/page.tsx` is wired to Formspree (`NEXT_PUBLIC_FORMSPREE_ID=mnpnqqjk`) with client-side validation, loading spinners, and error handling.
 
-### B. Contact Form Email Delivery
-* `src/app/contact/page.tsx` has form validation and UI success states.
-* **To deliver emails to `rainieh32@gmail.com`:** Connect a serverless form provider like **Formspree** (`https://formspree.io/f/YOUR_ID`), **Resend**, or **EmailJS**.
-
-### C. Domain Cutover
-* Once client approves, add a custom domain (`ehehair.com`) in GitHub Pages settings (or Vercel) and update DNS A/CNAME records to retire the old WordPress hosting.
+### C. Domain Cutover (Pending Client Go-Ahead)
+* Once client approves final review, add custom domain (`ehehair.com`) in Vercel project settings and point DNS A/CNAME records to Vercel.
 
 ---
 
