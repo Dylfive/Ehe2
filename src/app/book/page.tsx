@@ -287,15 +287,16 @@ export default function BookPage() {
                   className={`book-service-card${booking.serviceId === svc.id ? " selected" : ""}`}
                   onClick={() => setBooking(b => ({ ...b, serviceId: svc.id }))}
                 >
-                  <div className="book-service-hero" style={{ backgroundImage: `url(${svc.image})` }}>
-                    <span className="book-service-hero-name">{svc.name}</span>
-                  </div>
+                  <div className="book-service-hero" style={{ backgroundImage: `url(${svc.image})` }} />
                   <div className="book-service-body">
-                    <div className="book-service-meta">
-                      <Clock size={13} />
-                      <span>{svc.duration} min</span>
+                    <div className="book-service-info">
+                      <div className="book-service-meta">
+                        <Clock size={13} />
+                        <span>{svc.duration} min</span>
+                      </div>
+                      <div className="book-service-price">${svc.price}.00</div>
                     </div>
-                    <div className="book-service-price">${svc.price}.00</div>
+                    <div className="book-service-name">{svc.name}</div>
                   </div>
                 </button>
               ))}
