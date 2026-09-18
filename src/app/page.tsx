@@ -13,14 +13,7 @@ export default function HomePage() {
       {/* 1. HERO SECTION */}
       <section style={{ backgroundColor: "var(--color-bg-subtle)", padding: "4.5rem 0 5.5rem" }}>
         <div className="container">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.1fr 0.9fr",
-              gap: "3.5rem",
-              alignItems: "center",
-            }}
-          >
+          <div className="hero-grid">
             <div>
               <span className="badge" style={{ marginBottom: "1rem" }}>
                 Discover Your Beauty Potential

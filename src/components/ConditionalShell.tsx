@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import { AuthProvider } from "@/context/AuthContext";
 import { ScheduleProvider } from "@/context/ScheduleContext";
 
@@ -30,6 +31,7 @@ export default function ConditionalShell({ children }: { children: React.ReactNo
         <CartDrawer />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
+        <MobileBottomNav />
       </ScheduleProvider>
     </>
   );
