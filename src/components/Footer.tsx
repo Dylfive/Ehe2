@@ -25,13 +25,38 @@ export default function Footer() {
             <p style={{ color: "#A09E9B", fontSize: "0.95rem", maxWidth: "340px", marginBottom: "1.5rem" }}>
               Experience the perfect blend of skill, style, and care at Ehe Hair. Elevating beauty routines with premier salon products and bespoke services.
             </p>
-            <div style={{ display: "flex", gap: "1rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", alignItems: "flex-start" }}>
               <Link
                 href="/shop"
                 className="btn btn-outline btn-sm"
                 style={{ borderColor: "rgba(255,255,255,0.2)", color: "#FFFFFF" }}
               >
                 Explore Shop
+              </Link>
+              <Link
+                href="/stylist/login"
+                className="btn btn-sm"
+                style={{
+                  backgroundColor: "#E53E3E",
+                  color: "#FFFFFF",
+                  fontWeight: 600,
+                  fontSize: "0.82rem",
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                  padding: "0.45rem 0.9rem",
+                  borderRadius: "6px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  boxShadow: "0 2px 8px rgba(229, 62, 62, 0.4)",
+                  border: "none",
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                Stylist Portal Login
               </Link>
             </div>
           </div>
@@ -44,7 +69,7 @@ export default function Footer() {
               <li><Link href="/shop">Shop All Products</Link></li>
               <li><Link href="/about">About Ehe Hair</Link></li>
               <li><Link href="/hair-clinic">Hair Clinic</Link></li>
-              <li><Link href="/contact">Book An Appointment</Link></li>
+              <li><Link href="/book">Book An Appointment</Link></li>
             </ul>
           </div>
 
