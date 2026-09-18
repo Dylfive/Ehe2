@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import CartDrawer from "@/components/CartDrawer";
+import ConditionalShell from "@/components/ConditionalShell";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ehehair.com"),
@@ -32,10 +30,9 @@ export default function RootLayout({
         {/* Hidden Google Translate mount point */}
         <div id="google_translate_element" style={{ display: "none" }} />
         <CartProvider>
-          <Header />
-          <CartDrawer />
-          <main style={{ flex: 1 }}>{children}</main>
-          <Footer />
+          <ConditionalShell>
+            {children}
+          </ConditionalShell>
         </CartProvider>
         <Script id="google-translate-init" strategy="afterInteractive">
           {`

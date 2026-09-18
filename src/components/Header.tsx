@@ -75,7 +75,7 @@ export default function Header() {
             </button>
 
             <Link
-              href="/contact"
+              href="/book"
               className="btn btn-primary btn-sm"
               style={{ display: "inline-flex" }}
             >
@@ -124,7 +124,7 @@ export default function Header() {
               <LanguageSelector />
             </div>
             <Link
-              href="/contact"
+              href="/book"
               onClick={() => setMobileMenuOpen(false)}
               className="btn btn-primary btn-sm"
               style={{ width: "100%", justifyContent: "center", marginTop: "0.5rem" }}

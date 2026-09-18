@@ -40,7 +40,7 @@ export default function HomePage() {
                 Experience the perfect blend of skill and style at Ehe Hair, where every visit is a step toward your best self.
               </p>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                <Link href="/contact" className="btn btn-primary">
+                <Link href="/book" className="btn btn-primary">
                   Book An Appointment
                 </Link>
                 <Link href="/shop" className="btn btn-outline">
