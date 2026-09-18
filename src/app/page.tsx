@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PRODUCTS } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
-import { ArrowRight, Star, CheckCircle, Sparkles, Clock, Calendar } from "lucide-react";
+import { ArrowRight, Sparkles, Clock, Calendar } from "lucide-react";
 
 export default function HomePage() {
   const featuredProducts = PRODUCTS.slice(0, 4);
@@ -407,87 +407,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. CUSTOMER SUCCESS STORIES (TESTIMONIALS) */}
-      <section style={{ padding: "6rem 0", backgroundColor: "#FFFFFF" }}>
-        <div className="container">
-          <div style={{ textAlign: "center", maxWidth: "600px", margin: "0 auto 3.5rem" }}>
-            <span className="badge" style={{ marginBottom: "1rem" }}>
-              Customer Success Stories
-            </span>
-            <h2 style={{ marginBottom: "1rem" }}>Words From Our Happy Clients</h2>
-            <p>See what our valued customers have to say about their experience with Ehe Hair.</p>
-          </div>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-              gap: "2.5rem",
-            }}
-          >
-            {[
-              {
-                text: "I have been going to the salon for awhile now and every cut I get is just phenomenal.",
-                author: "Satisfied Customer",
-                role: "Client",
-                img: "https://ehehair.com/wp-content/uploads/2024/02/testimonial-skip-01.jpg",
-              },
-              {
-                text: "I love Ehe Hair Salon. One of my favourite hairstylist here. Moreover, all the equipment are nice condition and great service.",
-                author: "Satisfied Customer",
-                role: "Regular Client",
-                img: "https://ehehair.com/wp-content/uploads/2024/02/testimonial-skip-02.jpg",
-              },
-            ].map((t, i) => (
-              <div
-                key={i}
-                style={{
-                  padding: "2.5rem",
-                  borderRadius: "var(--radius-md)",
-                  border: "1px solid var(--color-border-subtle)",
-                  backgroundColor: "var(--color-bg-subtle)",
-                }}
-              >
-                <div style={{ display: "flex", gap: "0.25rem", color: "#F59E0B", marginBottom: "1.25rem" }}>
-                  {[...Array(5)].map((_, idx) => (
-                    <Star key={idx} size={18} fill="#F59E0B" />
-                  ))}
-                </div>
-                <p
-                  style={{
-                    fontSize: "1.05rem",
-                    lineHeight: 1.7,
-                    fontStyle: "italic",
-                    color: "var(--color-text-main)",
-                    marginBottom: "2rem",
-                  }}
-                >
-                  “{t.text}”
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                  <div
-                    style={{
-                      position: "relative",
-                      width: 50,
-                      height: 50,
-                      borderRadius: "50%",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <Image src={t.img} alt={t.author} fill style={{ objectFit: "cover" }} />
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 700, fontSize: "1rem" }}>{t.author}</div>
-                    <div style={{ fontSize: "0.85rem", color: "var(--color-text-muted)" }}>{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 8. CALL TO ACTION BANNER */}
+      {/* 7. CALL TO ACTION BANNER */}
       <section
         style={{
           padding: "5rem 0",

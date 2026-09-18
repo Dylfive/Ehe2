@@ -11,7 +11,7 @@ export default function ContactPage() {
     firstName: "",
     lastName: "",
     email: "",
-    service: "Appointment Booking",
+    service: "Virtual Consultation",
     message: "",
   });
 
@@ -62,7 +62,7 @@ export default function ContactPage() {
           </span>
           <h1 style={{ marginBottom: "1rem" }}>Contact Us for Beauty Solutions</h1>
           <p style={{ fontSize: "1.1rem", color: "var(--color-text-muted)" }}>
-            Whether you are booking a salon visit, scheduling a virtual consultation, or inquiring about our hair products, we are here to assist you.
+            Whether you are scheduling a virtual consultation, inquiring about our hair care products, or have questions for our team, we are here to assist you.
           </p>
         </div>
 
@@ -189,7 +189,6 @@ export default function ContactPage() {
                       cursor: "pointer",
                     }}
                   >
-                    <option value="Appointment Booking">In-Salon Appointment Booking</option>
                     <option value="Virtual Consultation">Virtual Consultation (Zoom Hair Clinic)</option>
                     <option value="Product Inquiries">Product Recommendations &amp; Inquiries</option>
                     <option value="General Support">General Inquiries</option>
@@ -339,10 +338,25 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 style={{ fontSize: "1rem", marginBottom: "0.25rem" }}>Address</h4>
-                  <p style={{ fontSize: "1rem", color: "var(--color-text-main)", lineHeight: 1.5 }}>
+                  <p style={{ fontSize: "1rem", color: "var(--color-text-main)", lineHeight: 1.5, marginBottom: "0.4rem" }}>
                     3749 Shelbourne St #207<br />
                     Victoria, BC V8P 5N4
                   </p>
+                  <a
+                    href="https://maps.google.com/?q=3749+Shelbourne+St+%23207,+Victoria,+BC+V8P+5N4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: "0.85rem",
+                      fontWeight: 600,
+                      color: "var(--color-accent)",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.3rem",
+                    }}
+                  >
+                    Get Directions &rarr;
+                  </a>
                 </div>
               </div>
 
@@ -371,6 +385,63 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Sleek Google Maps Section */}
+        <div style={{ marginTop: "4.5rem" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              marginBottom: "1.5rem",
+              flexWrap: "wrap",
+              gap: "1rem",
+            }}
+          >
+            <div>
+              <span className="badge" style={{ marginBottom: "0.5rem" }}>
+                Salon Location
+              </span>
+              <h2 style={{ fontSize: "1.75rem", margin: 0 }}>Find Us in Victoria, BC</h2>
+              <p style={{ color: "var(--color-text-muted)", marginTop: "0.4rem", marginBottom: 0 }}>
+                Conveniently located at Shelbourne Plaza with dedicated customer parking.
+              </p>
+            </div>
+            <a
+              href="https://maps.google.com/?q=3749+Shelbourne+St+%23207,+Victoria,+BC+V8P+5N4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline btn-sm"
+              style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
+            >
+              <MapPin size={15} />
+              Open in Google Maps
+            </a>
+          </div>
+
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "440px",
+              borderRadius: "var(--radius-lg)",
+              overflow: "hidden",
+              border: "1px solid var(--color-border)",
+              boxShadow: "var(--shadow-md)",
+              backgroundColor: "var(--color-bg-subtle)",
+            }}
+          >
+            <iframe
+              title="Ehe Hair Salon Location Map"
+              src="https://maps.google.com/maps?q=3749%20Shelbourne%20St%20%23207,%20Victoria,%20BC%20V8P%205N4&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0, display: "block" }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </div>
