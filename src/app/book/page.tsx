@@ -7,11 +7,11 @@ import { useSchedule } from "@/context/ScheduleContext";
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const SERVICES = [
-  { id: "bang-cut",     name: "Bang Cut",        price: 20, duration: 30 },
-  { id: "men-cut",      name: "Men Cut",          price: 41, duration: 30 },
-  { id: "women-cut",    name: "Women Cut",        price: 55, duration: 45 },
-  { id: "student-boy",  name: "Student Boy Cut",  price: 38, duration: 30 },
-  { id: "student-girl", name: "Student Girl Cut", price: 50, duration: 45 },
+  { id: "bang-cut",     name: "Bang Cut",        price: 20, duration: 30, image: "/images/services/bang_cut.jpg" },
+  { id: "men-cut",      name: "Men Cut",          price: 41, duration: 30, image: "/images/services/men_cut.jpg" },
+  { id: "women-cut",    name: "Women Cut",        price: 55, duration: 45, image: "/images/services/women_cut.jpg" },
+  { id: "student-boy",  name: "Student Boy Cut",  price: 38, duration: 30, image: "/images/services/student_boy.jpg" },
+  { id: "student-girl", name: "Student Girl Cut", price: 50, duration: 45, image: "/images/services/student_girl.jpg" },
 ] as const;
 
 const STYLISTS = [
@@ -287,7 +287,7 @@ export default function BookPage() {
                   className={`book-service-card${booking.serviceId === svc.id ? " selected" : ""}`}
                   onClick={() => setBooking(b => ({ ...b, serviceId: svc.id }))}
                 >
-                  <div className="book-service-hero">
+                  <div className="book-service-hero" style={{ backgroundImage: `url(${svc.image})` }}>
                     <span className="book-service-hero-name">{svc.name}</span>
                   </div>
                   <div className="book-service-body">

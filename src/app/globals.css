@@ -942,7 +942,9 @@ body {
 }
 
 .book-service-hero {
-  background: linear-gradient(135deg, #c0218a 0%, #9b1870 100%);
+  background-color: #e2e8f0;
+  background-size: cover;
+  background-position: center;
   height: 120px;
   display: flex;
   align-items: flex-end;
