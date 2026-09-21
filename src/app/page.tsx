@@ -105,16 +105,8 @@ export default function HomePage() {
       {/* 2. STATS SECTION */}
       <section style={{ padding: "3rem 0", borderBottom: "1px solid var(--color-border-subtle)", background: "#FFFFFF" }}>
         <div className="container">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "5rem",
-              flexWrap: "wrap",
-              textAlign: "center",
-            }}
-          >
-            <div>
+          <div className="stats-row">
+            <div className="stat-item">
               <div
                 style={{
                   fontFamily: "var(--font-heading)",
@@ -130,8 +122,8 @@ export default function HomePage() {
                 Years Of Experience
               </div>
             </div>
-            <div style={{ width: "1px", background: "var(--color-border-subtle)" }} />
-            <div>
+            <div className="stats-divider" />
+            <div className="stat-item">
               <div
                 style={{
                   fontFamily: "var(--font-heading)",
@@ -277,15 +269,9 @@ export default function HomePage() {
       {/* 5. LEARN ABOUT EHE HAIR */}
       <section style={{ padding: "6rem 0", backgroundColor: "#FFFFFF" }}>
         <div className="container">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1.1fr",
-              gap: "4rem",
-              alignItems: "center",
-            }}
-          >
+          <div className="home-split-grid">
             <div
+              className="home-split-img"
               style={{
                 position: "relative",
                 aspectRatio: "572 / 500",
@@ -303,7 +289,7 @@ export default function HomePage() {
               />
             </div>
 
-            <div>
+            <div className="home-split-text">
               <span className="badge" style={{ marginBottom: "1rem" }}>
                 Learn About Ehe Hair
               </span>
@@ -329,14 +315,7 @@ export default function HomePage() {
       {/* 6. WHY CHOOSE US */}
       <section style={{ padding: "6rem 0", backgroundColor: "var(--color-bg-subtle)" }}>
         <div className="container">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.1fr 0.9fr",
-              gap: "4rem",
-              alignItems: "center",
-            }}
-          >
+          <div className="home-split-grid home-split-grid-reverse">
             <div>
               <span className="badge" style={{ marginBottom: "1rem" }}>
                 Why Choose Us?
@@ -387,6 +366,7 @@ export default function HomePage() {
             </div>
 
             <div
+              className="home-split-img"
               style={{
                 position: "relative",
                 aspectRatio: "550 / 650",

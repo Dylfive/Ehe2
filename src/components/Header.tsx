@@ -62,8 +62,10 @@ export default function Header() {
 
           {/* Actions */}
           <div className="header-actions">
-            {/* Language Selector */}
-            <LanguageSelector />
+            {/* Language Selector — desktop only (mobile version sits beside hamburger) */}
+            <span className="header-lang-desktop">
+              <LanguageSelector />
+            </span>
 
             <button
               onClick={toggleCart}
@@ -81,6 +83,11 @@ export default function Header() {
             >
               Book An Appointment
             </Link>
+
+            {/* Language Selector — mobile only, top-right beside hamburger */}
+            <span className="header-lang-mobile">
+              <LanguageSelector />
+            </span>
 
             {/* Mobile hamburger */}
             <button
@@ -120,7 +127,7 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <div style={{ marginTop: "0.5rem", display: "flex", gap: "1rem", alignItems: "center" }}>
+            <div className="mobile-menu-lang" style={{ marginTop: "0.5rem", display: "flex", gap: "1rem", alignItems: "center" }}>
               <LanguageSelector />
             </div>
             <Link

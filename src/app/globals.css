@@ -293,12 +293,33 @@ img {
   padding: 0.5rem;
 }
 
+/* Language selector visibility helpers */
+.header-lang-desktop {
+  display: inline-flex;
+  align-items: center;
+}
+.header-lang-mobile {
+  display: none;
+  align-items: center;
+}
+
 @media (max-width: 960px) {
   .nav-links {
     display: none;
   }
   .mobile-menu-toggle {
     display: flex;
+  }
+  /* Hide desktop language selector, show mobile one beside hamburger */
+  .header-lang-desktop {
+    display: none;
+  }
+  .header-lang-mobile {
+    display: inline-flex;
+  }
+  /* Hide the in-menu duplicate since it's now in the header */
+  .mobile-menu-lang {
+    display: none;
   }
 }
 
@@ -1631,10 +1652,64 @@ body {
   align-items: center;
 }
 
+/* -- Home page split sections -- */
+.home-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.home-split-grid-reverse {
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+/* -- Stats row -- */
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.stats-divider {
+  width: 1px;
+  background: var(--color-border-subtle);
+}
+
 @media (max-width: 768px) {
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  /* Split sections: single column, image on top */
+  .home-split-grid {
+    grid-template-columns: 1fr;
+  }
+  .home-split-grid-reverse {
+    grid-template-columns: 1fr;
+  }
+  /* Image always renders first in DOM order on mobile */
+  .home-split-img {
+    order: -1;
+  }
+  .home-split-text {
+    order: 1;
+  }
+  /* Stats: stack vertically, centered, hide divider */
+  .stats-row {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  .stats-divider {
+    display: none;
+  }
+  .stat-item {
+    width: 100%;
+    text-align: center;
   }
   
   .mobile-bottom-nav {
