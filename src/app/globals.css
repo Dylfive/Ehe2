@@ -303,6 +303,26 @@ img {
   align-items: center;
 }
 
+/* Pinned mobile language selector in top right */
+.mobile-lang-pin {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-lang-pin {
+    display: block;
+    position: fixed;
+    top: 0.85rem;
+    right: 1rem;
+    z-index: 95;
+  }
+  .mobile-lang-pin button {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+}
+
 @media (max-width: 960px) {
   .nav-links {
     display: none;

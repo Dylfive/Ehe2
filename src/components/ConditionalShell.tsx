@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import LanguageSelector from "@/components/LanguageSelector";
 import { AuthProvider } from "@/context/AuthContext";
 import { ScheduleProvider } from "@/context/ScheduleContext";
 
@@ -28,6 +29,10 @@ export default function ConditionalShell({ children }: { children: React.ReactNo
       {/* We only wrap the schedule/auth context if needed, but since book page uses ScheduleContext to read availability, we need ScheduleProvider in the public shell too! */}
       <ScheduleProvider>
         <Header />
+        {/* Language selector pinned top-right on mobile (header is hidden ≤768px) */}
+        <div className="mobile-lang-pin">
+          <LanguageSelector />
+        </div>
         <CartDrawer />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
