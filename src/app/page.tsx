@@ -54,8 +54,8 @@ export default function HomePage() {
                 }}
               >
                 <Image
-                  src="https://ehehair.com/wp-content/uploads/2024/09/pexels-photo-897271.jpeg"
-                  alt="Ehe Hair Beauty Model"
+                  src="/images/hero/pexels_cut_3993470.jpg"
+                  alt="Hair Stylist Precision Haircut with Shears"
                   fill
                   priority
                   sizes="(max-width: 960px) 100vw, 50vw"
