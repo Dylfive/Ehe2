@@ -54,7 +54,7 @@ export default function HomePage() {
                 }}
               >
                 <Image
-                  src="/images/hero/pexels_cut_3993470.jpg"
+                  src="/images/hero/pexels_cut_3993445.jpg"
                   alt="Hair Stylist Precision Haircut with Shears"
                   fill
                   priority
