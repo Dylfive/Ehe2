@@ -85,16 +85,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
 
             {/* Actions: Quantity & Main Add to Cart */}
             <div className="product-actions-row">
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  border: "1px solid var(--color-border)",
-                  borderRadius: "var(--radius-full)",
-                  padding: "0.25rem 0.5rem",
-                  backgroundColor: "#FFFFFF",
-                }}
-              >
+              <div className="product-qty-wrap">
                 <button
                   className="qty-btn"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -103,14 +94,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                 >
                   <Minus size={14} />
                 </button>
-                <span
-                  style={{
-                    padding: "0 0.8rem",
-                    fontWeight: 600,
-                    minWidth: "2.5rem",
-                    textAlign: "center",
-                  }}
-                >
+                <span className="product-qty-value">
                   {quantity}
                 </span>
                 <button
@@ -125,18 +109,17 @@ export default function ProductDetailClient({ product }: { product: Product }) {
 
               <button
                 onClick={handleAddToCart}
-                className={`btn ${added ? "btn-accent" : "btn-primary"}`}
-                style={{ flex: 1 }}
+                className={`btn product-add-btn ${added ? "btn-accent" : "btn-primary"}`}
               >
                 {added ? (
                   <>
                     <Check size={18} />
-                    Added to Cart!
+                    <span>Added to Cart!</span>
                   </>
                 ) : (
                   <>
                     <ShoppingBag size={18} />
-                    Add To Cart &bull; ${(product.price * quantity).toFixed(2)}
+                    <span>Add To Cart &bull; ${(product.price * quantity).toFixed(2)}</span>
                   </>
                 )}
               </button>
