@@ -8,7 +8,7 @@ export const metadata = {
   openGraph: {
     title: "Hair Clinic Virtual Consultation | Ehe Hair",
     description: "Meet with a licensed hair specialist via Zoom for personalized diagnosis and treatment plans. Book your hair clinic session today.",
-    url: "https://ehehair.com/hair-clinic",
+    url: "/hair-clinic",
   },
 };
 

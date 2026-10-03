@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Book a Salon Appointment | Ehe Hair",
     description: "Easy online booking for haircuts and styling services at Ehe Hair, Victoria. Select your service, pick a stylist, and reserve your time.",
-    url: "https://ehehair.com/book",
+    url: "/book",
   },
 };
 

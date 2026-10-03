@@ -9,7 +9,7 @@ export const metadata = {
   openGraph: {
     title: "About Ehe Hair | Redefining Beauty Standards",
     description: "Our story, mission, and values — redefining beauty through innovation, virtual care, and premier salon products.",
-    url: "https://ehehair.com/about",
+    url: "/about",
   },
 };
 

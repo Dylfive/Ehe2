@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact Ehe Hair | Victoria Salon & Virtual Consultations",
     description: "Reach our team for virtual consultations, product inquiries, or visit our Victoria, BC location. Mon–Sat 9 AM–7 PM.",
-    url: "https://ehehair.com/contact",
+    url: "/contact",
   },
 };
 

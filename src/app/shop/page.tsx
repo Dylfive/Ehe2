@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shop Premium Hair Care | Ehe Hair",
     description: "Professional styling pastes, shampoos, conditioners, and more — salon-tested and delivered to your door.",
-    url: "https://ehehair.com/shop",
+    url: "/shop",
   },
 };
 

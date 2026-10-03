@@ -4,15 +4,24 @@ import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import ConditionalShell from "@/components/ConditionalShell";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_APP_URL && !process.env.NEXT_PUBLIC_APP_URL.includes("localhost")
+    ? process.env.NEXT_PUBLIC_APP_URL
+    : process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "https://ehe2.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ehehair.com"),
+  metadataBase: new URL(siteUrl),
   title: "Ehe Hair | Salon Experience & Premium Hair Products",
   description: "Discover Your Beauty Potential. Elevate your beauty routine with Ehe Hair - experience the perfect blend of skill and style, plus top salon hair care products.",
   keywords: "Ehe Hair, hair salon, styling paste, Paul Mitchell, shampoo, hair clinic, beauty",
   openGraph: {
     title: "Ehe Hair | Salon Experience & Premium Hair Care",
     description: "Discover Your Beauty Potential. Elevate your beauty routine with Ehe Hair.",
-    url: "https://ehehair.com",
+    url: "/",
     siteName: "Ehe Hair",
     locale: "en_US",
     type: "website",
@@ -37,7 +46,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "HairSalon",
   name: "Ehe Hair",
-  url: "https://ehehair.com",
+  url: siteUrl,
   telephone: "+17785331456",
   email: "rainieh32@gmail.com",
   address: {
@@ -61,7 +70,7 @@ const localBusinessSchema = {
       closes: "19:00",
     },
   ],
-  image: "https://ehehair.com/og-image.jpg",
+  image: `${siteUrl}/og-image.jpg`,
   priceRange: "$$",
 };
 
