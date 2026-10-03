@@ -4,8 +4,13 @@ import Link from "next/link";
 import { Sparkles, Heart, Target, Globe } from "lucide-react";
 
 export const metadata = {
-  title: "About Us | Ehe Hair - Redefining Beauty Standards",
-  description: "Learn about Ehe Hair's mission, values, and journey in redefining beauty through innovation, virtual consultations, and salon products.",
+  title: "About Ehe Hair | Redefining Beauty in Victoria, BC",
+  description: "Learn about Ehe Hair's mission, story, and values — redefining beauty through innovative virtual consultations, expert stylists, and premium salon products in Victoria, BC.",
+  openGraph: {
+    title: "About Ehe Hair | Redefining Beauty Standards",
+    description: "Our story, mission, and values — redefining beauty through innovation, virtual care, and premier salon products.",
+    url: "https://ehehair.com/about",
+  },
 };
 
 export default function AboutPage() {

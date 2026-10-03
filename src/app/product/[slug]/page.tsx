@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: PageProps) {
       <ProductDetailClient product={product} />
 
       {/* Related Products */}
-      <section style={{ padding: "4rem 0 6rem", backgroundColor: "var(--color-bg-subtle)" }}>
+      <section className="product-related-section">
         <div className="container">
           <div style={{ marginBottom: "2.5rem" }}>
             <span className="badge" style={{ marginBottom: "0.5rem" }}>

@@ -3,8 +3,13 @@ import Link from "next/link";
 import { Video, Calendar, ShieldCheck, Sparkles, CheckCircle, ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: "Hair Clinic – Virtual Consultation | Ehe Hair",
-  description: "Meet with an Ehe Hair specialist via virtual consultation to diagnose and provide tailored solutions for hair loss, thinning, wigs, and scalp care.",
+  title: "Hair Clinic – Virtual Hair Consultation | Ehe Hair",
+  description: "Book a 1-on-1 Zoom consultation with an Ehe Hair specialist for tailored solutions on hair loss, thinning, scalp care, wigs, and balding — from the comfort of home.",
+  openGraph: {
+    title: "Hair Clinic Virtual Consultation | Ehe Hair",
+    description: "Meet with a licensed hair specialist via Zoom for personalized diagnosis and treatment plans. Book your hair clinic session today.",
+    url: "https://ehehair.com/hair-clinic",
+  },
 };
 
 export default function HairClinicPage() {

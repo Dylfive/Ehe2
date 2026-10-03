@@ -87,12 +87,18 @@ export default function Footer() {
 
           {/* Salon Info */}
           <div className="footer-col">
-            <h4>Salon & Support</h4>
+            <h4>Salon &amp; Support</h4>
             <p style={{ color: "#A09E9B", fontSize: "0.95rem", marginBottom: "0.8rem" }}>
               Questions about products or hair consultations? Reach out to our dedicated salon team.
             </p>
             <p style={{ color: "var(--color-accent)", fontWeight: 600, fontSize: "0.95rem", marginBottom: "0.5rem" }}>
               Online Hours: Mon - Sat: 9:00 AM - 7:00 PM
+            </p>
+            <p style={{ fontSize: "0.9rem", marginBottom: "0.35rem" }}>
+              <a href="tel:+17785331456" style={{ color: "#A09E9B", textDecoration: "none" }}>📞 +1 778-533-1456</a>
+            </p>
+            <p style={{ fontSize: "0.9rem", marginBottom: "0.5rem" }}>
+              <a href="mailto:rainieh32@gmail.com" style={{ color: "#A09E9B", textDecoration: "none" }}>✉️ rainieh32@gmail.com</a>
             </p>
             <p style={{ color: "#A09E9B", fontSize: "0.85rem" }}>
               Secure online payments powered by Stripe.

@@ -16,7 +16,53 @@ export const metadata: Metadata = {
     siteName: "Ehe Hair",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ehe Hair – Salon Experience & Premium Hair Care",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ehe Hair | Salon Experience & Premium Hair Care",
+    description: "Discover Your Beauty Potential. Elevate your beauty routine with Ehe Hair.",
+    images: ["/og-image.jpg"],
+  },
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  name: "Ehe Hair",
+  url: "https://ehehair.com",
+  telephone: "+17785331456",
+  email: "rainieh32@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "3749 Shelbourne St #207",
+    addressLocality: "Victoria",
+    addressRegion: "BC",
+    postalCode: "V8P 5N4",
+    addressCountry: "CA",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 48.4388,
+    longitude: -123.3595,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "09:00",
+      closes: "19:00",
+    },
+  ],
+  image: "https://ehehair.com/og-image.jpg",
+  priceRange: "$$",
 };
 
 export default function RootLayout({
@@ -27,6 +73,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
         {/* Hidden Google Translate mount point */}
         <div id="google_translate_element" style={{ display: "none" }} />
         <CartProvider>
