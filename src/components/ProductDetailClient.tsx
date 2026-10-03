@@ -1,12 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/data/products";
-import { ShieldCheck, Truck, Sparkles } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { Plus, Minus, ShoppingBag, Check, ShieldCheck, Truck, Sparkles } from "lucide-react";
 
 export default function ProductDetailClient({ product }: { product: Product }) {
+  const { addToCart } = useCart();
+  const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
   return (
     <div className="product-detail-wrapper">
       <div className="container">
@@ -71,6 +82,65 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                 </ul>
               </div>
             )}
+
+            {/* Actions: Quantity & Main Add to Cart */}
+            <div className="product-actions-row">
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  border: "1px solid var(--color-border)",
+                  borderRadius: "var(--radius-full)",
+                  padding: "0.25rem 0.5rem",
+                  backgroundColor: "#FFFFFF",
+                }}
+              >
+                <button
+                  className="qty-btn"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  style={{ border: "none" }}
+                  aria-label="Decrease quantity"
+                >
+                  <Minus size={14} />
+                </button>
+                <span
+                  style={{
+                    padding: "0 0.8rem",
+                    fontWeight: 600,
+                    minWidth: "2.5rem",
+                    textAlign: "center",
+                  }}
+                >
+                  {quantity}
+                </span>
+                <button
+                  className="qty-btn"
+                  onClick={() => setQuantity(quantity + 1)}
+                  style={{ border: "none" }}
+                  aria-label="Increase quantity"
+                >
+                  <Plus size={14} />
+                </button>
+              </div>
+
+              <button
+                onClick={handleAddToCart}
+                className={`btn ${added ? "btn-accent" : "btn-primary"}`}
+                style={{ flex: 1 }}
+              >
+                {added ? (
+                  <>
+                    <Check size={18} />
+                    Added to Cart!
+                  </>
+                ) : (
+                  <>
+                    <ShoppingBag size={18} />
+                    Add To Cart &bull; ${(product.price * quantity).toFixed(2)}
+                  </>
+                )}
+              </button>
+            </div>
 
             {/* Guarantees Box */}
             <div className="product-detail-guarantees">

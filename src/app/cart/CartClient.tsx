@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -257,7 +257,7 @@ export default function CartClient() {
                 {isCheckingOut ? (
                   <>
                     <Loader2 size={18} style={{ animation: "spin 1s linear infinite" }} />
-                    Redirecting to StripeΓÇª
+                    Redirecting to Stripe...
                   </>
                 ) : (
                   <>

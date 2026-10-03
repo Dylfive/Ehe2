@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useMemo } from "react";
-import { ChevronRight, ChevronLeft, Clock, CheckCircle2 } from "lucide-react";
+import { ChevronRight, ChevronLeft, Clock, CheckCircle2, Check } from "lucide-react";
 import { useSchedule } from "@/context/ScheduleContext";
 
 // ΓöÇΓöÇΓöÇ Data ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
@@ -228,7 +228,7 @@ export default function BookClient() {
             <div className="book-confirm-row"><span>Stylist</span><strong>{selectedStylist?.name}</strong></div>
             <div className="book-confirm-row">
               <span>Date &amp; Time</span>
-              <strong>{booking.date ? fmtDateLong(booking.date) : "ΓÇö"} at {booking.timeSlot}</strong>
+              <strong>{booking.date ? fmtDateLong(booking.date) : "—"} at {booking.timeSlot}</strong>
             </div>
             <div className="book-confirm-row"><span>Price</span><strong>${selectedService?.price}.00</strong></div>
           </div>
@@ -262,10 +262,16 @@ export default function BookClient() {
                     disabled={!isDone}
                     aria-current={isActive ? "step" : undefined}
                   >
-                    <span className="book-crumb-num">{isDone ? "Γ£ô" : s}</span>
+                    <span className="book-crumb-num">
+                      {isDone ? <Check size={12} strokeWidth={3} /> : s}
+                    </span>
                     <span className="book-crumb-text">{label}</span>
                   </button>
-                  {i < 3 && <span className="book-crumb-sep">ΓÇ║</span>}
+                  {i < 3 && (
+                    <span className="book-crumb-sep">
+                      <ChevronRight size={14} />
+                    </span>
+                  )}
                 </React.Fragment>
               );
             })}
@@ -442,7 +448,7 @@ export default function BookClient() {
                 <div className="book-modal-summary-col">
                   <div className="book-modal-label">Date</div>
                   <div className="book-modal-value">
-                    {booking.date ? fmtDateLong(booking.date) : "ΓÇö"}
+                    {booking.date ? fmtDateLong(booking.date) : "—"}
                     {step === 4 && booking.timeSlot ? ` ${booking.timeSlot.toLowerCase()}` : ""}
                   </div>
                 </div>
